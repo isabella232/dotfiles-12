@@ -1,0 +1,37 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage[frenchb]{babel}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{listings}
+
+\topmargin -3cm
+\textheight 27cm
+\textwidth 17cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+
+\definecolor{keywordcolor}{rgb}{0.90,0.00,0.00}
+\definecolor{idcolor}{rgb}{0.10,0.10,0.50}
+\definecolor{stringcolor}{rgb}{0.20,0.50,0.20}
+\definecolor{commentcolor}{rgb}{0.40,0.40,0.40}
+
+\lstset{
+language=C++,%
+basicstyle=\ttfamily\small,%
+keywordstyle=\color{keywordcolor},%
+identifierstyle=\color{idcolor},%
+stringstyle={\color{stringcolor}\underbar},%
+commentstyle={\color{commentcolor}\itshape},%
+numbers=left,%
+numberstyle=\tiny,%
+firstnumber=1,%
+stepnumber=1,%
+frame=tlrb,%
+framerule=0.8pt,%
+showstringspaces=false,%
+breakautoindent=true,%
+tabsize=1,%
+}
+

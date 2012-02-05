@@ -1,0 +1,32 @@
+\documentclass[12pt]{lettre}
+ 
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{eurosym}
+\usepackage[french]{babel}
+ 
+\makeatletter
+\newcommand*{\NoRule}{\renewcommand*{\rule@length}{0}}
+\makeatother
+
+\begin{document}
+\begin{letter}{Destinataire\\Adresse\\Ville}
+\NoRule
+
+\name{Jonathan Amiez}
+\address{Jonathan Amiez\\Adresse\\CP Ville}
+\lieu{Ville}
+\notelephone
+\nofax
+ 
+\conc{Objet}
+
+\opening{Madame, Monsieur,}
+ 
+\closing{Dans cette attente, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.}
+ 
+\end{letter}
+ 
+\end{document}
+
