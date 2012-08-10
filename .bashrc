@@ -81,7 +81,7 @@ PROMPT_COMMAND=
 ######## Utilities ########
 
 if [ -n $SSH_AUTH_SOCK ]; then
-  for key in $HOME/.ssh/*_rsa; do
+  for key in $(find $HOME/.ssh -name '*_rsa'); do
     if [ `/usr/bin/ssh-add -l | grep $key | wc -l` -ne 1 ]; then
       /usr/bin/ssh-add $key
     fi
