@@ -38,18 +38,17 @@ set foldlevel=1
 
 let mapleader = ","
 
-map <silent> .# :s/^\(\s*\)/\1\# /<CR> :nohlsearch<CR>
-map <silent> .? :s/^\(\s*\)\# /\1/<CR> :nohlsearch<CR>
-
 " Ctrl-C > copy to clip
 vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+nnoremap <silent> <F8> :NERDTreeToggle<CR>
+nnoremap <silent> <F9> :TagbarToggle<CR>
 
 function! StripWhitespace ()
   exec ':%s/ \+$//gc'
 endfunction
 map ,s :call StripWhitespace ()<CR>
 
-""""""""
-
 let g:tagbar_foldlevel = 1
-let g:proj_window_width = 30
+let g:tagbar_width = 30
+
+""autocmd vimenter * NERDTree
