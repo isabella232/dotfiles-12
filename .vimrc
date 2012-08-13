@@ -20,9 +20,11 @@ set noswapfile
 set ruler
 set title
 set backspace=indent,eol,start
-set history=1000
+set history=10000
+set showmatch
 set showcmd
 set incsearch
+set ignorecase
 
 set tagstack
 set tags=tags
@@ -36,19 +38,29 @@ set foldlevel=1
 
 """"""""
 
+autocmd FileType c,cpp,java,php,js,python,ruby,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
 let mapleader = ","
 
 " Ctrl-C > copy to clip
 vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-nnoremap <silent> <F8> :NERDTreeToggle<CR>
-nnoremap <silent> <F9> :TagbarToggle<CR>
 
 function! StripWhitespace ()
   exec ':%s/ \+$//gc'
 endfunction
 map ,s :call StripWhitespace ()<CR>
 
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+nnoremap Y y$
+
+" Plugin shortcuts
+nnoremap <silent> <F6> :NERDTreeToggle<CR>
+nnoremap <silent> <F7> :TagbarToggle<CR>
+nnoremap <silent> <F8> :CtrlP<CR>
+
 let g:tagbar_foldlevel = 1
 let g:tagbar_width = 30
-
-""autocmd vimenter * NERDTree
+let g:ctrlp_working_path_mode = 'rc'
