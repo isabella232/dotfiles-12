@@ -9,7 +9,7 @@ export HISTCONTROL=ignoredups
 export TEXPATH=~/.tex
 export TEXINPUTS=$TEXINPUTS:$TEXPATH
 
-export VISUAL=view
+export VISUAL=less
 export EDITOR=vim
 
 ######## Shell improvement ########
@@ -37,14 +37,8 @@ alias c='clear'
 alias now='date +%Y%m%d%H%M%S'
 
 alias suvi='sudo vim'
-alias suvim='sudo vim'
-alias vimp='vim +Project -p'
-
-alias top='htop'
-alias psgr='ps aux | grep'
-alias psf='ps faux'
-alias psw='ps auxwww'
-alias dpgr='dpkg -l | grep'
+alias suvim='suvi'
+alias vimp='vim +Project'
 
 alias reboot='sudo reboot'
 alias halt='sudo halt'
@@ -65,6 +59,46 @@ alias sudo='sudo '
 
 alias ipmi='ipmitool -I lanplus -U ADMIN -H'
 
+######## Functions ########
+
+function is_git_rep {
+  git rev-parse --show-toplevel
+}
+
+function git_br {
+  b=$(git symbolic-ref HEAD 2>/dev/null); [ "$b"  ] && echo ${b##*/}
+}
+
+function git_rbm {
+  branch=$(git_br)
+  if [ $branch  ]; then
+    if [ $branch != "master"  ]; then
+      git co master
+    fi
+    git pull && git co $1 && git rebase
+  else
+    echo "Not a git repo"
+  fi
+}
+
+function git_prompt {
+  b=$(git_br); [ "$b"  ] && echo \($b\)
+}
+
+function load_ssh_keys {
+  if [ -n $SSH_AUTH_SOCK ]; then
+    for key in $(find $HOME/.ssh -name '*_rsa'); do
+      if [ `/usr/bin/ssh-add -l | grep $key | wc -l` -ne 1 ]; then
+        /usr/bin/ssh-add $key
+      fi
+    done
+  fi
+}
+
+function load_rvm_env {
+  [[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
+}
+
 ######## Fancy prompt ########
 
 WHI="\[\033[00m\]"
@@ -74,18 +108,8 @@ YEL="\[\033[1;33m\]"
 BLU="\[\033[1;34m\]"
 MAG="\[\033[1;35m\]"
 
-PS1="$BLU[\$(date +%H%M%S)] $RED${debian_chroot:+($debian_chroot)}[\u@\h$WHI:$GRE\w$RED] # $WHI"
-
+PS1="$BLU[\$(date +%H%M%S)] $RED${debian_chroot:+($debian_chroot)}\h:\w $GRE\$(git_prompt)$WHI$ "
 PROMPT_COMMAND=
 
-######## Utilities ########
-
-if [ -n $SSH_AUTH_SOCK ]; then
-  for key in $(find $HOME/.ssh -name '*_rsa'); do
-    if [ `/usr/bin/ssh-add -l | grep $key | wc -l` -ne 1 ]; then
-      /usr/bin/ssh-add $key
-    fi
-  done
-fi
-
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
+load_ssh_keys
+load_rvm_env
