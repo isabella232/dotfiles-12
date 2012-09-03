@@ -1,3 +1,6 @@
+[[ $- != *i*  ]] && return
+[[ $TERM != screen*  ]] && exec tmux
+
 ######## Env Variables ##########
 
 BASE_PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
@@ -9,7 +12,7 @@ export HISTCONTROL=ignoredups
 export TEXPATH=~/.tex
 export TEXINPUTS=$TEXINPUTS:$TEXPATH
 
-export VISUAL=less
+export VISUAL=view
 export EDITOR=vim
 
 ######## Shell improvement ########
@@ -38,7 +41,6 @@ alias now='date +%Y%m%d%H%M%S'
 
 alias suvi='sudo vim'
 alias suvim='suvi'
-alias vimp='vim +Project'
 
 alias reboot='sudo reboot'
 alias halt='sudo halt'
@@ -61,12 +63,8 @@ alias ipmi='ipmitool -I lanplus -U ADMIN -H'
 
 ######## Functions ########
 
-function is_git_rep {
-  git rev-parse --show-toplevel
-}
-
 function git_br {
-  b=$(git symbolic-ref HEAD 2>/dev/null); [ "$b"  ] && echo ${b##*/}
+  b=$(git symbolic-ref HEAD 2>/dev/null); [ "$b" ] && echo ${b##*/}
 }
 
 function git_rbm {
@@ -82,7 +80,7 @@ function git_rbm {
 }
 
 function git_prompt {
-  b=$(git_br); [ "$b"  ] && echo \($b\)
+  b=$(git_br); [ "$b" ] && echo -n "($b) "
 }
 
 function load_ssh_keys {
@@ -101,14 +99,18 @@ function load_rvm_env {
 
 ######## Fancy prompt ########
 
-WHI="\[\033[00m\]"
-RED="\[\033[1;31m\]"
-GRE="\[\033[1;32m\]"
-YEL="\[\033[1;33m\]"
-BLU="\[\033[1;34m\]"
-MAG="\[\033[1;35m\]"
+WHI='\033[00m'
+RED='\033[1;31m'
+GRE='\033[1;32m'
+BLU='\033[1;34m'
+END='$'
 
-PS1="$BLU[\$(date +%H%M%S)] $RED${debian_chroot:+($debian_chroot)}\h:\w $GRE\$(git_prompt)$WHI$ "
+PS1="\$(rc=\$?;
+echo -en '$RED\u@\h$WHI:$BLU\w $GRE'
+git_prompt
+[ \$rc -eq 0 ] && echo -en '$WHI$END$WHI ' || echo -en '$RED$END$WHI '
+)"
+
 PROMPT_COMMAND=
 
 load_ssh_keys
