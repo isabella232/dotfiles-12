@@ -1,6 +1,6 @@
 [user]
-	name = Jonathan Amiez
-	email = jonathan.amiez@gmail.com
+  name = NAME
+  email = MAIL
 
 [color]
   ui = auto
@@ -21,3 +21,13 @@
   added = yellow
   changed = green bold
   untracked = blue bold
+
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  br = branch
+  df = diff
+
+[core] 
+  whitespace = trailing-space,cr-at-eol ; warn about unwanted characters
