@@ -94,7 +94,8 @@ function load_ssh_keys {
 }
 
 function load_rvm_env {
-  [[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
+  [[ -r $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
+  [[ -r $HOME/.rvm/scripts/completion ]] && . $HOME/.rvm/scripts/completion
 }
 
 ######## Fancy prompt ########
