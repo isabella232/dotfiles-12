@@ -35,8 +35,8 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 set foldmethod=indent
-set foldnestmax=10
-set foldlevel=1
+"set foldnestmax=10
+"set foldlevel=1
 
 """"""""
 
