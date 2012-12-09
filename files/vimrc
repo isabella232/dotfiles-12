@@ -34,7 +34,7 @@ set tags=tags
 set encoding=utf-8
 set fileencoding=utf-8
 
-set foldmethod=indent
+"set foldmethod=indent
 "set foldnestmax=10
 "set foldlevel=1
 

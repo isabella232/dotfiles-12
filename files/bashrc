@@ -43,19 +43,18 @@ alias suvi='sudo vim'
 alias suvim='suvi'
 
 alias reboot='sudo reboot'
-alias halt='sudo halt'
+alias halt='sudo poweroff'
 
 alias utarg='tar -zxvf'
 alias utarb='tar -jxvf'
 alias targ='tar -zcvf'
 alias tarb='tar -jcvf'
 
-alias aptitude='sudo aptitude'
-alias ains='aptitude install'
-alias aupd='aptitude update'
-alias aupgs='aptitude safe-upgrade'
-alias asrch='aptitude search'
-alias apurg='aptitude purge'
+alias apti='sudo apt-get install'
+alias aptu='sudo apt-get update'
+alias aptg='sudo apt-get dist-upgrade'
+alias aptr='sudo apt-get remove --purge'
+alias apts='apt-cache search'
 
 alias sudo='sudo '
 
