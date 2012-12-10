@@ -1,0 +1,24 @@
+ZSH=$HOME/.zsh
+
+[[ -r $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
+
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
+
+plugins=(bundler gem git knife rails3 rvm)
+
+for config_file ($ZSH/lib/*.zsh); do
+  source $config_file
+done
+
+fpath=($ZSH/plugins/$plugin $fpath)
+
+# Load and run compinit
+autoload -U compinit
+compinit -i
+
+source $ZSH/plugins/*.plugin.zsh
+
+source $ZSH/theme
