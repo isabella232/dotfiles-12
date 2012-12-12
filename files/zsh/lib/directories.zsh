@@ -40,3 +40,7 @@ function take() {
   mkdir -p $1
   cd $1
 }
+
+function collapsed_wd() {
+  echo $(pwd | perl -pe "s|^$HOME|~|g; s|/([^/])[^/]*(?=/)|/\$1|g")
+}

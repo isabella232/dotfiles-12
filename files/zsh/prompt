@@ -3,14 +3,6 @@ autoload -U colors zsh/terminfo # Used in the colour alias below
 colors
 setopt prompt_subst
 
-_collapsed_wd() {
-  echo $(pwd | perl -pe "s|^$HOME|~|g; s|/([^/])[^/]*(?=/)|/\$1|g")
-}
-
-_rvm_status() {
-  echo $(rvm-prompt v g s)
-}
-
 for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
   eval C_$color='%{$fg[${(L)color}]%}'
   eval CB_$color='%{$fg_bold[${(L)color}]%}'
@@ -18,8 +10,7 @@ done
 eval C_NO_COLOR="%{$terminfo[sgr0]%}"
 
 local user_color=$C_GREEN; [ $UID -eq 0 ] && user_color=$C_RED
-
-PROMPT='%{$CB_RED%}$(_rvm_status) %{$user_color%}%n@%m %{$CB_BLUE%}$(_collapsed_wd) %{$reset_color%}%(!.#.$) '
+PROMPT='%{$CB_RED%}$(rvm_prompt_info) %{$user_color%}%n@%m %{$CB_BLUE%}$(collapsed_wd) %{$reset_color%}%(!.#.$) '
 PROMPT2='%{$C_RED%}\> %{$reset_color%}'
 
 local return_status="%{$CB_RED%}%(?..%?)%{$reset_color%}"
@@ -36,3 +27,5 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$CB_RED%}-"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$CB_MAGENTA%}>"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$CB_YELLOW%}#"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$CB_CYAN%}?"
+
+ZSH_THEME_RVM_PROMPT_OPTIONS="v g s"

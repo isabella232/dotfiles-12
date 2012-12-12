@@ -1,13 +1,12 @@
-ZSH=$HOME/.zsh
+[[ $- != *i*  ]] && return
+[[ $TERM != screen*  ]] && exec tmux
 
-[[ -r $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
+ZSH=$HOME/.zsh
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
-
-plugins=(bundler gem git knife rails3 rvm)
 
 for config_file ($ZSH/lib/*.zsh); do
   source $config_file
@@ -19,6 +18,12 @@ fpath=($ZSH/plugins/$plugin $fpath)
 autoload -U compinit
 compinit -i
 
-source $ZSH/plugins/*.plugin.zsh
+plugins=(git rails3 rvm)
 
-source $ZSH/theme
+for plugin ($plugins); do
+  source $ZSH/plugins/$plugin.plugin.zsh
+done
+
+source $ZSH/prompt
+
+load_ssh_keys
