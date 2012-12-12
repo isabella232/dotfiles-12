@@ -93,9 +93,10 @@ function load_ssh_keys {
   fi
 }
 
-function load_rvm_env {
+function load_env {
   [[ -r $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
   [[ -r $HOME/.rvm/scripts/completion ]] && . $HOME/.rvm/scripts/completion
+#  [[ -s $HOME/.tmuxinator/scripts/tmuxinator  ]] && . $HOME/.tmuxinator/scripts/tmuxinator
 }
 
 ######## Fancy prompt ########
@@ -114,5 +115,5 @@ git_prompt
 
 PROMPT_COMMAND=
 
+load_env
 load_ssh_keys
-load_rvm_env
