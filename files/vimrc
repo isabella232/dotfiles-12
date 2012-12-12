@@ -34,7 +34,7 @@ set tags=tags
 set encoding=utf-8
 set fileencoding=utf-8
 
-set foldmethod=indent
+"set foldmethod=indent
 "set foldnestmax=10
 "set foldlevel=1
 
@@ -62,6 +62,10 @@ nnoremap Y y$
 nnoremap <silent> <F6> :NERDTreeToggle<CR>
 nnoremap <silent> <F7> :TagbarToggle<CR>
 nnoremap <silent> <F8> :CtrlP<CR>
+
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 let g:tagbar_foldlevel = 1
 let g:tagbar_width = 30
