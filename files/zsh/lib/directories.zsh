@@ -42,5 +42,5 @@ function take() {
 }
 
 function collapsed_wd() {
-  echo $(pwd | perl -pe "s|^$HOME|~|g; s|/([^/])[^/]*(?=/)|/\$1|g")
+  echo $(pwd | perl -pe "s|^$HOME|~|g; s|/([^/]{${ZSH_THEME_DIR_SLICE:=1}})[^/]*(?=/)|/\$1|g")
 }

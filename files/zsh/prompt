@@ -10,7 +10,7 @@ done
 eval C_NO_COLOR="%{$terminfo[sgr0]%}"
 
 local user_color=$C_GREEN; [ $UID -eq 0 ] && user_color=$C_RED
-PROMPT='%{$CB_RED%}$(rvm_prompt_info) %{$user_color%}%n@%m %{$CB_BLUE%}$(collapsed_wd) %{$reset_color%}%(!.#.$) '
+PROMPT='%{$CB_RED%}$(rvm_prompt_info)%{$user_color%}%n@%m %{$CB_BLUE%}$(collapsed_wd) %{$reset_color%}%(!.#.$) '
 PROMPT2='%{$C_RED%}\> %{$reset_color%}'
 
 local return_status="%{$CB_RED%}%(?..%?)%{$reset_color%}"
@@ -29,3 +29,6 @@ ZSH_THEME_GIT_PROMPT_UNMERGED="%{$CB_YELLOW%}#"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$CB_CYAN%}?"
 
 ZSH_THEME_RVM_PROMPT_OPTIONS="v g s"
+ZSH_THEME_RVM_PROMPT_SUFFIX=" "
+
+ZSH_THEME_DIR_SLICE=3
