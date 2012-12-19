@@ -12,3 +12,12 @@ function load_ssh_keys() {
     done
   fi
 }
+
+
+function encode64() {
+  echo -n $1 | base64
+}
+
+function decode64() {
+  echo -n $1 | base64 -D
+}

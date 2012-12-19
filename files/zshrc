@@ -3,25 +3,27 @@
 
 ZSH=$HOME/.zsh
 
+BASE_PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH=$HOME/bin:$HOME/.gem/ruby/1.8/bin:$BASE_PATH
+
+export TEXPATH=~/.tex
+export TEXINPUTS=$TEXINPUTS:$TEXPATH
+
+export VISUAL=view
+export EDITOR=vim
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
-for config_file ($ZSH/lib/*.zsh); do
-  source $config_file
-done
+fpath=($ZSH/plugins $fpath)
 
-fpath=($ZSH/plugins/$plugin $fpath)
-
-# Load and run compinit
 autoload -U compinit
 compinit -i
 
-plugins=(git rails3 rvm)
-
-for plugin ($plugins); do
-  source $ZSH/plugins/$plugin.plugin.zsh
+for config_file ($ZSH/lib/*.zsh); do
+  source $config_file
 done
 
 source $ZSH/prompt
