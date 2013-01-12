@@ -2,3 +2,5 @@ gemsets/*Gemfile.lock
 files/vim/bundle
 files/vim/.netrwhist
 files/zsh/cache/
+files/zsh/extra/*
+!.gitkeep

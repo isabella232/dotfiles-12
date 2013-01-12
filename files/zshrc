@@ -26,6 +26,10 @@ for config_file ($ZSH/lib/*.zsh); do
   source $config_file
 done
 
+for extra_file ($ZSH/extra/*.zsh); do
+  source $extra_file
+done
+
 source $ZSH/prompt
 
 load_ssh_keys

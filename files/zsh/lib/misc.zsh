@@ -13,3 +13,6 @@ export PAGER="less"
 export LESS="-R"
 
 export LC_CTYPE=$LANG
+
+## skip globbing if no match
+setopt null_glob
