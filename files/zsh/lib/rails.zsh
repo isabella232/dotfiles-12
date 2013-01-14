@@ -8,6 +8,6 @@ function _rails_command () {
   fi
 }
 
-alias rconsole='_rails_command console'
-alias rdbconole='_rails_command dbconsole'
-alias rserver='_rails_command server'
+alias rcons='_rails_command console'
+alias rdbcons='_rails_command dbconsole'
+alias rserv='_rails_command server'
