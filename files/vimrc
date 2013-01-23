@@ -37,7 +37,8 @@ set fileencoding=utf-8
 "set foldnestmax=10
 "set foldlevel=1
 
-""""""""
+set list listchars=tab:»·,trail:·
+highlight SpecialKey ctermfg=red ctermbg=red
 
 autocmd FileType c,cpp,java,php,js,python,ruby,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
