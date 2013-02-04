@@ -28,7 +28,7 @@
   co = checkout
   br = branch
   df = diff
-  gr = "!g() { git push origin HEAD:refs/for/master/$1;  }; g"
+  gr = "!g() { git push gerrit HEAD:refs/for/master/$1;  }; g"
 
 [core] 
   whitespace = trailing-space,cr-at-eol ; warn about unwanted characters
