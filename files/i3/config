@@ -99,6 +99,8 @@ bar {
 
 force_xinerama yes
 
+focus_follows_mouse no
+
 assign [class="Kmail"] 1
 assign [class="Gwenview"] 1
 assign [class="Iceweasel"] 1
