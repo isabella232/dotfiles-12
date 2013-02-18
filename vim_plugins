@@ -7,3 +7,4 @@ tagbar https://github.com/majutsushi/tagbar.git
 template https://github.com/vim-scripts/template.vim.git
 vim-fugitive https://github.com/tpope/vim-fugitive.git
 vim-pipe https://github.com/vim-scripts/vim-pipe.git
+vim-coffee-script https://github.com/kchmck/vim-coffee-script
