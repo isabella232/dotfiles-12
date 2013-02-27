@@ -1,5 +1,12 @@
 [[ $- != *i*  ]] && return
-[[ $TERM != screen*  ]] && exec tmux
+if [[ $TERM != screen*  ]]; then
+  session=$(tmux list-sessions | awk -F':' '/[^\(attached\)]$/ {print $1}' | head -1)
+  if [ "x$session" != "x" ]; then
+    exec tmux attach -t $session
+  else
+    exec tmux
+  fi
+fi
 
 ZSH=$HOME/.zsh
 
