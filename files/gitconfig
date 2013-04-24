@@ -28,7 +28,7 @@
   co = checkout
   br = branch
   df = diff
-  gr = "!g() { git push gerrit HEAD:refs/for/master/$1;  }; g"
+  gr = "!g() { if [ $# -eq 1 ]; then BR=$1; else BR=$(git rev-parse --abbrev-ref HEAD); fi; git push gerrit HEAD:refs/for/master/$BR;  }; g"
 
 [core] 
   whitespace = trailing-space,cr-at-eol ; warn about unwanted characters
