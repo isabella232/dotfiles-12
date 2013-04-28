@@ -105,6 +105,7 @@ assign [class="Kmail"] 1
 assign [class="Gwenview"] 1
 assign [class="Iceweasel"] 1
 assign [class="Nagstamon"] 1
+assign [class="Amarok"] 1
 assign [class="Konsole"] 2
 for_window [class="Konsole"] border 1pixel
 
