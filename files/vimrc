@@ -1,5 +1,7 @@
 call pathogen#infect()
 
+"set t_Co=256
+
 syntax on
 filetype plugin indent on
 colorscheme desert
@@ -19,6 +21,7 @@ set nowritebackup
 set noswapfile
 
 set ruler
+set laststatus=2
 set title
 set backspace=indent,eol,start
 set history=10000

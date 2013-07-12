@@ -115,4 +115,4 @@ exec konsole
 exec kmail
 exec iceweasel
 
-bindsym $mod+Mod1+l exec i3lock -c 000000
+bindsym F9 exec i3lock -c 000000
