@@ -5,7 +5,6 @@ URxvt.foreground: rgb:B2/B2/B2
 URxvt.background: rgb:12/12/12
 URxvt.font: xft:DejaVu Sans Mono:antialias=true:pixelsize=12
 URxvt.scrollBar: false
-URxvt.visualBell: true
 URxvt.fading: 15
 
 URxvt.perl-ext-common: default,matcher,vtwheel

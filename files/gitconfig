@@ -29,6 +29,7 @@
   br = branch
   df = diff
   gr = "!g() { if [ $# -eq 1 ]; then BR=$1; else BR=$(git rev-parse --abbrev-ref HEAD); fi; git push gerrit HEAD:refs/for/master/$BR;  }; g"
+  grd = "!gd() { if [ $# -eq 1 ]; then BR=$1; else BR=$(git rev-parse --abbrev-ref HEAD); fi; git push gerrit HEAD:refs/drafts/master/$BR;  }; gd"
   cmp = "!cpm() { git co master; git pull; }; cpm"
 
 [core]
