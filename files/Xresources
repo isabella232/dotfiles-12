@@ -1,31 +1,14 @@
 URxvt.loginShell: true
-URxvt.saveLines: 10000
+URxvt.saveLines: 0
 URxvt.cutchars: "`\"'&()*,:;<=>?[\\]^{|}$"
 URxvt.foreground: rgb:B2/B2/B2
 URxvt.background: rgb:12/12/12
 URxvt.font: xft:DejaVu Sans Mono:antialias=true:pixelsize=12
 URxvt.scrollBar: false
 URxvt.fading: 15
+URxvt.secondaryWheel: true
 
 URxvt.perl-ext-common: default,matcher,vtwheel
 URxvt.url-launcher: /usr/bin/firefox
 URxvt.matcher.button: 3
 URxvt.colorUL: #AF8700
-
-urxvt.tintColor: #ffffff
-urxvt.color0: #000000
-urxvt.color1: #a40000
-urxvt.color2: #4e9a06
-urxvt.color3: #c4a000
-urxvt.color4: #204a87
-urxvt.color5: #ce5c00
-urxvt.color6: #038e82
-urxvt.color7: #babdb6
-urxvt.color8: #555753
-urxvt.color9: #cc0000
-urxvt.color10: #73d216
-urxvt.color11: #edd400
-urxvt.color12: #3465a4
-urxvt.color13: #f57900
-urxvt.color14: #05d2c1
-urxvt.color15: #d3d7cf
