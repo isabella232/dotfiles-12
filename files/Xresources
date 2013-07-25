@@ -1,4 +1,3 @@
-# xrdb -merge ~/.Xresources
 URxvt.loginShell: true
 URxvt.saveLines: 10000
 URxvt.cutchars: "`\"'&()*,:;<=>?[\\]^{|}$"
