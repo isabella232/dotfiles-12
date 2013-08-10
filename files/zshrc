@@ -39,4 +39,5 @@ done
 
 source $ZSH/prompt
 
+setup_gpg_agent
 load_ssh_keys
