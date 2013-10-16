@@ -7,6 +7,7 @@ function start_gpg_agent {
 }
 
 function setup_gpg_agent() {
+  which gpg-agent > /dev/null || return
   if [ -f "${GPG_ENV}" ]; then
     . ${GPG_ENV} > /dev/null
     ps -ef | grep ${SSH_AGENT_PID} | grep gpg-agent > /dev/null
