@@ -4,7 +4,7 @@
 ######## Env Variables ##########
 
 BASE_PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
-export PATH=$HOME/bin:$HOME/.gem/ruby/1.8/bin:$BASE_PATH
+export PATH=$HOME/.rbenv/bin:$HOME/bin:$BASE_PATH
 
 export HISTFILESIZE=10000
 export HISTCONTROL=ignoredups
@@ -92,12 +92,6 @@ function load_ssh_keys {
   fi
 }
 
-function load_env {
-  [[ -r $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
-  [[ -r $HOME/.rvm/scripts/completion ]] && . $HOME/.rvm/scripts/completion
-#  [[ -s $HOME/.tmuxinator/scripts/tmuxinator  ]] && . $HOME/.tmuxinator/scripts/tmuxinator
-}
-
 ######## Fancy prompt ########
 
 WHI='\[\033[00m\]'
@@ -114,5 +108,8 @@ git_prompt
 
 PROMPT_COMMAND=
 
-load_env
+if command rbenv 2> /dev/null; then
+  eval "$(rbenv init -)"
+fi
+
 load_ssh_keys

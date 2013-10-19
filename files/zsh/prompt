@@ -25,7 +25,7 @@ function spectrum_ls() {
 }
 
 local user_color=$FG[040]; [ $UID -eq 0 ] && user_color=$FG[166]
-PROMPT='$FG[166]$(rvm_prompt_info)$user_color%n@%m $FG[032]$(collapsed_wd) %{$reset_color%}%(!.#.$) '
+PROMPT='$FG[166]$(rbenv_prompt)$user_color%n@%m $FG[032]$(collapsed_wd) %{$reset_color%}%(!.#.$) '
 PROMPT2='$FG[166]\> %{$reset_color%}'
 
 local return_status="$FG[124]%(?..%?)%{$reset_color%}"
@@ -42,8 +42,5 @@ ZSH_THEME_GIT_PROMPT_DELETED="$FG[166]-"
 ZSH_THEME_GIT_PROMPT_RENAMED="$FG[129]>"
 ZSH_THEME_GIT_PROMPT_UNMERGED="$FG[214]#"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="$FG[087]?"
-
-ZSH_THEME_RVM_PROMPT_OPTIONS="v g s"
-ZSH_THEME_RVM_PROMPT_SUFFIX=" "
 
 ZSH_THEME_DIR_SLICE=3
