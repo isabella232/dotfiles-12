@@ -1,0 +1,89 @@
+#!/bin/sh
+
+# require build-essential, git
+
+SCRIPT=$(readlink -f $0)
+CWD=$(dirname $SCRIPT)
+FILES=$CWD/files
+
+replace_file() {
+  src=$FILES/$1
+  dst=$HOME/.$1
+  if [ -f $dst -o -d $dst ]; then
+    echo "$dst exists: [s]kip, [o]verwrite, [b]ackup ?"
+    read rep
+    case "$rep" in
+      b|B)
+        mv $dst ${dst}.old
+        ln -s $src $dst
+        ;;
+      o|O)
+        rm -rf $dst
+        ln -s $src $dst
+        ;;
+      *)
+        echo "Skipping $dst"
+        ;;
+    esac
+  else
+    ln -s $src $dst
+  fi
+}
+
+setup_files() {
+  for file in $(ls $FILES); do
+    orifile=$FILES/$file
+    dotfile=$HOME/.$file
+    if [ -L $dotfile ]; then
+      absfile=$(readlink -f $dotfile)
+      if [ $absfile != $orifile ]; then
+        echo $dotfile links to $absfile
+        replace_file $file
+      fi
+    else
+      replace_file $file
+    fi
+  done
+}
+
+setup_vim() {
+  mkdir -p $FILES/vim/bundle
+  eval $(awk -v dir="$FILES/vim/bundle/" '{
+    print "if [ ! -d "dir$1" ]; then git clone "$2" "dir$1"; fi;"
+  }' $CWD/vim_plugins)
+}
+
+setup_rbenv() {
+  RBENV=$HOME/.rbenv
+  PLUGINS=$RBENV/plugins
+
+  if [ ! -d $RBENV ]; then
+    git clone https://github.com/sstephenson/rbenv.git $RBENV
+    mkdir -p $PLUGINS
+    git clone https://github.com/sstephenson/ruby-build.git $PLUGINS/ruby-build
+    git clone https://github.com/jf/rbenv-gemset.git $PLUGINS/rbenv-gemset
+
+    PATH=$RBENV/bin:$PATH
+    eval "$(rbenv init -)"
+
+    rbenv install -l
+    echo -n "Ruby version: "
+    read ruby
+    rbenv install $ruby
+    rbenv rehash
+    rbenv global $ruby
+
+    for gemset in $(ls $CWD/gemsets); do
+      rbenv gemset create $ruby $gemset
+      echo $gemset > $HOME/.rbenv-gemsets
+      gem install bundler
+      rbenv rehash
+      bundle install --gemfile $CWD/gemsets/$gemset
+      rbenv rehash
+    done
+  fi
+}
+
+setup_files
+setup_vim
+setup_rbenv
