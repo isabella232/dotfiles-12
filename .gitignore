@@ -1,3 +1,4 @@
+gemsets/*.lock
 files/vim/bundle
 files/vim/.netrwhist
 files/zsh/cache/
