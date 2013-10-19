@@ -1,6 +1,7 @@
-export PATH=$HOME/.rbenv/bin:$PATH
+RBENV=$HOME/.rbenv
+export PATH=$RBENV/bin:$PATH
 
-if command rbenv 2> /dev/null; then
+if type rbenv &> /dev/null; then
   eval "$(rbenv init -)"
 
   rsudo() {
@@ -14,8 +15,8 @@ if command rbenv 2> /dev/null; then
 fi
 
 rbenv_prompt() {
-  command rbenv 2> /dev/null || return
-  prompt=$(rbenv version-name)
+  type rbenv &> /dev/null || return
+  prompt=$(cat $RBENV/version)
   gemsets=$(rbenv gemset active 2> /dev/null)
   if [ $? -eq 0 ]; then
     prompt="$prompt@${gemsets%% *}"
