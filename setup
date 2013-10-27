@@ -62,6 +62,7 @@ setup_rbenv() {
     mkdir -p $PLUGINS
     git clone https://github.com/sstephenson/ruby-build.git $PLUGINS/ruby-build
     git clone https://github.com/jf/rbenv-gemset.git $PLUGINS/rbenv-gemset
+    git clone git://github.com/dcarley/rbenv-sudo.git $PLUGINS/rbenv-sudo
 
     PATH=$RBENV/bin:$PATH
     eval "$(rbenv init -)"
