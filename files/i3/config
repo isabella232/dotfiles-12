@@ -106,6 +106,7 @@ assign [class="Iceweasel"] 1
 assign [class="Icedove"] 1
 assign [class="Nagstamon"] 1
 assign [class="Amarok"] 1
+assign [class="Okular"] 1
 assign [class="URxvt"] 2
 for_window [class="URxvt"] border 1pixel
 
