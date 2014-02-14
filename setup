@@ -5,6 +5,9 @@
 SCRIPT=$(readlink -f $0)
 CWD=$(dirname $SCRIPT)
 FILES=$CWD/files
+DEFAULT_RUBY=2.1.0
+
+[ -z $RUBY ] && RUBY=$DEFAULT_RUBY
 
 replace_file() {
   src=$FILES/$1
@@ -56,35 +59,53 @@ setup_vim() {
 }
 
 setup_rbenv() {
+  echo "Setting up rbenv"
   RBENV=$HOME/.rbenv
-  PLUGINS=$RBENV/plugins
+  PLUGIN_DIR=$RBENV/plugins
 
   if [ ! -d $RBENV ]; then
-    git clone https://github.com/sstephenson/rbenv.git $RBENV
-    mkdir -p $PLUGINS
-    git clone https://github.com/sstephenson/ruby-build.git $PLUGINS/ruby-build
-    git clone https://github.com/jf/rbenv-gemset.git $PLUGINS/rbenv-gemset
-    git clone git://github.com/dcarley/rbenv-sudo.git $PLUGINS/rbenv-sudo
+    echo " * Installing rbenv"
+    git clone https://github.com/sstephenson/rbenv.git $RBENV 2> /dev/null
 
-    PATH=$RBENV/bin:$PATH
-    eval "$(rbenv init -)"
+    fresh=1
+  else
+    echo " * Updating rbenv"
+    cd $RBENV; git pull > /dev/null; cd $OLDPWD
 
-    rbenv install -l
-    echo -n "Ruby version: "
-    read ruby
-    rbenv install $ruby
-    rbenv rehash
-    rbenv global $ruby
-
-    for gemset in $(ls $CWD/gemsets); do
-      rbenv gemset create $ruby $gemset
-      echo $gemset > $HOME/.rbenv-gemsets
-      gem install bundler
-      rbenv rehash
-      bundle install --gemfile $CWD/gemsets/$gemset
-      rbenv rehash
-    done
+    fresh=0
   fi
+
+  mkdir -p $PLUGIN_DIR
+  for plugin in rbenv_plugins/*; do
+    plugin_name=$(basename $plugin)
+    if [ ! -d $PLUGIN_DIR/$plugin_name ]; then
+      echo " * Installing $plugin_name"
+      cd $PLUGIN_DIR; git clone $(cat $CWD/$plugin) $plugin_name 2> /dev/null; cd $OLDPWD
+    else
+      echo " * Updating $plugin_name"
+      cd $PLUGIN_DIR/$plugin_name; git pull > /dev/null; cd $OLDPWD
+    fi
+  done
+
+  [ $fresh -eq 1 ] && install_ruby
+}
+
+install_ruby() {
+  echo "Installing ruby $RUBY"
+  PATH=$HOME/.rbenv/bin:$PATH
+  eval "$(rbenv init -)"
+  rbenv install $RUBY
+  rbenv rehash
+  rbenv global $RUBY
+
+  for gemset in $(ls $CWD/gemsets); do
+    rbenv gemset create $ruby $gemset
+    echo $gemset > $HOME/.rbenv-gemsets
+    gem install bundler
+    rbenv rehash
+    bundle install --gemfile $CWD/gemsets/$gemset
+    rbenv rehash
+  done
 }
 
 setup_files
