@@ -47,10 +47,19 @@ setup_files() {
 }
 
 setup_vim() {
-  mkdir -p $FILES/vim/bundle
-  eval $(awk -v dir="$FILES/vim/bundle/" '{
-    print "if [ ! -d "dir$1" ]; then git clone "$2" "dir$1"; fi;"
-  }' $CWD/vim_plugins)
+  echo "Setting up Vim"
+  PLUGIN_DIR=$FILES/vim/bundle
+  mkdir -p $PLUGIN_DIR
+  for plugin in vim_plugins/*; do
+    plugin_name=$(basename $plugin)
+    if [ ! -d $PLUGIN_DIR/$plugin_name ]; then
+      echo " * Installing $plugin_name"
+      cd $PLUGIN_DIR; git clone $(cat $CWD/$plugin) $plugin_name 2> /dev/null; cd $OLDPWD
+    else
+      echo " * Updating $plugin_name"
+      cd $PLUGIN_DIR/$plugin_name; git pull > /dev/null; cd $OLDPWD
+    fi
+  done
 }
 
 setup_rbenv() {
