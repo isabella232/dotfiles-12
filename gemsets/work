@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'tmuxinator'
 gem 'wirble'
 gem 'chef'
-gem 'snmp'
 gem 'knife-sharp'
+gem 'nokogiri'
