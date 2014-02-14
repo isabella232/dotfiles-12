@@ -13,17 +13,9 @@ replace_file() {
     echo "$dst exists: [s]kip, [o]verwrite, [b]ackup ?"
     read rep
     case "$rep" in
-      b|B)
-        mv $dst ${dst}.old
-        ln -s $src $dst
-        ;;
-      o|O)
-        rm -rf $dst
-        ln -s $src $dst
-        ;;
-      *)
-        echo "Skipping $dst"
-        ;;
+      b|B) mv $dst ${dst}.old; ln -s $src $dst ;;
+      o|O) rm -rf $dst; ln -s $src $dst ;;
+      *) echo "Skipping $dst" ;;
     esac
   else
     ln -s $src $dst
@@ -31,6 +23,7 @@ replace_file() {
 }
 
 setup_files() {
+  echo "Setting up .dotfiles"
   for file in $(ls $FILES); do
     orifile=$FILES/$file
     dotfile=$HOME/.$file
