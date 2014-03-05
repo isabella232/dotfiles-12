@@ -1,3 +1,4 @@
+clear Lock
 keycode   8 =
 keycode   9 = Escape NoSymbol Escape
 keycode  10 = ampersand 1 ampersand 1 onesuperior exclamdown onesuperior

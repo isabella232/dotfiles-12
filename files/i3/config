@@ -115,5 +115,6 @@ exec urxvt
 exec urxvt
 exec icedove
 exec iceweasel
+exec xmodmap ~/.Xmodmap
 
 bindsym F9 exec i3lock -c 000000
