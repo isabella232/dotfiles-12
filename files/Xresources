@@ -1,14 +1,19 @@
-URxvt.loginShell: true
-URxvt.saveLines: 0
-URxvt.cutchars: "`\"'&()*,:;<=>?[\\]^{|}$"
-URxvt.foreground: rgb:B2/B2/B2
-URxvt.background: rgb:12/12/12
-URxvt.font: xft:DejaVu Sans Mono:antialias=true:pixelsize=12
-URxvt.scrollBar: false
-URxvt.fading: 15
-URxvt.secondaryWheel: true
+URxvt*background: #121212
+URxvt*foreground: #B2B2B2
+URxvt*fading: 20
+URxvt*fadeColor: #121212
+URxvt*cursorColor: #B2B2B2
+URxvt*pointerColorBackground: #50FC50
+URxvt*pointerColorForeground: #50FCF8
 
-URxvt.perl-ext-common: default,matcher,vtwheel
-URxvt.url-launcher: /usr/bin/firefox
-URxvt.matcher.button: 3
-URxvt.colorUL: #AF8700
+URxvt*loginShell: true
+URxvt*saveLines: 0
+URxvt*cutchars: "`\"'&()*,:;<=>?[\\]^{|}$"
+URxvt*font: xft:DejaVu Sans Mono:antialias=true:pixelsize=12
+URxvt*scrollBar: false
+URxvt*secondaryWheel: true
+
+URxvt*perl-ext-common: default,matcher,vtwheel
+URxvt*url-launcher: /usr/bin/firefox
+URxvt*matcher.button: 3
+URxvt*colorUL: #AF8700
