@@ -3,3 +3,8 @@ add Lock = Escape
 keysym Caps_Lock = Escape
 keysym Escape = Caps_Lock
 keycode 133 = Super_L NoSymbol Super_L
+
+keycode 110 = Home NoSymbol Home
+keycode 112 = Next NoSymbol Next
+keycode 115 = Prior NoSymbol Prior
+keycode 117 = End NoSymbol End
