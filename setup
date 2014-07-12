@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# require build-essential, git
-
 SCRIPT=$(readlink -f $0)
 CWD=$(dirname $SCRIPT)
 FILES=$CWD/files
@@ -44,13 +42,14 @@ setup_files() {
 
 setup_vim() {
   echo "Setting up Vim"
+  PLUGINS=$CWD/vim_plugins
   PLUGIN_DIR=$FILES/vim/bundle
   mkdir -p $PLUGIN_DIR
-  for plugin in vim_plugins/*; do
+  for plugin in $PLUGINS/*; do
     plugin_name=$(basename $plugin)
     if [ ! -d $PLUGIN_DIR/$plugin_name ]; then
       echo " * Installing $plugin_name"
-      cd $PLUGIN_DIR; git clone $(cat $CWD/$plugin) $plugin_name 2> /dev/null; cd $OLDPWD
+      cd $PLUGIN_DIR; git clone $(cat $plugin) $plugin_name 2> /dev/null; cd $OLDPWD
     else
       echo " * Updating $plugin_name"
       cd $PLUGIN_DIR/$plugin_name; git pull > /dev/null; cd $OLDPWD
@@ -61,6 +60,7 @@ setup_vim() {
 setup_rbenv() {
   echo "Setting up rbenv"
   RBENV=$HOME/.rbenv
+  PLUGINS=$CWD/rbenv_plugins
   PLUGIN_DIR=$RBENV/plugins
 
   if [ ! -d $RBENV ]; then
@@ -76,11 +76,11 @@ setup_rbenv() {
   fi
 
   mkdir -p $PLUGIN_DIR
-  for plugin in rbenv_plugins/*; do
+  for plugin in $PLUGINS/*; do
     plugin_name=$(basename $plugin)
     if [ ! -d $PLUGIN_DIR/$plugin_name ]; then
       echo " * Installing $plugin_name"
-      cd $PLUGIN_DIR; git clone $(cat $CWD/$plugin) $plugin_name 2> /dev/null; cd $OLDPWD
+      cd $PLUGIN_DIR; git clone $(cat $plugin) $plugin_name 2> /dev/null; cd $OLDPWD
     else
       echo " * Updating $plugin_name"
       cd $PLUGIN_DIR/$plugin_name; git pull > /dev/null; cd $OLDPWD
@@ -92,11 +92,14 @@ setup_rbenv() {
 
 install_ruby() {
   echo "Installing ruby $RUBY"
+  sudo apt-get install build-essential libssl-dev
   PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
   rbenv install $RUBY
   rbenv rehash
   rbenv global $RUBY
+
+  gem install wirble bundler
 
   for gemset in $(ls $CWD/gemsets); do
     rbenv gemset create $ruby $gemset
