@@ -42,6 +42,9 @@ set fileencoding=utf-8
 "set foldnestmax=10
 "set foldlevel=1
 
+set wildmenu
+set wildmode=list:longest,full
+
 set list listchars=tab:»·,trail:·
 highlight SpecialKey ctermfg=red ctermbg=red
 
