@@ -1,11 +1,14 @@
 #compdef pass
+#autoload
 
 # Copyright (C) 2012:
 #    Johan Venant <jvenant@invicem.pro>
 #    Brian Mattern <rephorm@rephorm.com>
 #    Jason A. Donenfeld <Jason@zx2c4.com>.
+#    Santiago Borrazás <sanbor@gmail.com>
 # All Rights Reserved.
 # This file is licensed under the GPLv2+. Please see COPYING for more information.
+
 
 _pass () {
 	local cmd
@@ -98,7 +101,7 @@ _pass_cmd_show () {
 _pass_complete_entries_helper () {
 	local IFS=$'\n'
 	local prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
-	_values -C 'passwords' $(find "$prefix" \( -name .git -o -name .gpg-id \) -prune -o $@ -print | sed -e "s#${prefix}.##" -e 's#\.gpg##' | sort)
+	_values -C 'passwords' $(find -L "$prefix" \( -name .git -o -name .gpg-id \) -prune -o $@ -print | sed -e "s#${prefix}.##" -e 's#\.gpg##' | sort)
 }
 
 _pass_complete_entries_with_subdirs () {

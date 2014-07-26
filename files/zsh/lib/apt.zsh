@@ -9,21 +9,6 @@ alias aptg='sudo apt-get upgrade'
 alias aptdg='sudo apt-get update && sudo apt-get dist-upgrade'
 alias aptr='sudo apt-get purge'
 
-# create a simple script that can be used to 'duplicate' a system
-apt-copy() {
-    print '#!/bin/sh'"\n" > apt-copy.sh
-
-    cmd='apt-get install'
-
-    for p in ${(f)"$(aptitude search -F "%p" --disable-columns \~i)"}; {
-        cmd="${cmd} ${p}"
-    }
-
-    print $cmd "\n" >> apt-copy.sh
-
-    chmod +x apt-copy.sh
-}
-
 # Prints apt history
 # Usage:
 #   apt-history install

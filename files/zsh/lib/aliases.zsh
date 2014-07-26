@@ -15,3 +15,5 @@ alias md='mkdir -p'
 alias c='clear'
 
 alias sudo='sudo '
+
+alias halt='sudo shutdown -h -P now'
