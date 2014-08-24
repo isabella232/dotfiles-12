@@ -1,7 +1,7 @@
-# ENV var to prevent spawning tmux
-if [ ! $skip_tmux ]; then
-  # Check if we already are in tmux
-  if [ ! $TMUX ]; then
+# Check if we already are in tmux
+if [ $TERM != "screen" ] && [ ! $TMUX ]; then
+  # ENV var to prevent spawning tmux
+  if [ ! $skip_tmux ]; then
     session=$(tmux list-sessions | awk -F':' '/[^\(attached\)]$/ {print $1; exit}')
     if [ "x$session" != "x" ]; then
       # If a session is detached, attach it
