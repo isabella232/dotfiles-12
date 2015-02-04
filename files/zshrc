@@ -3,7 +3,7 @@
 ZSH=$HOME/.zsh
 
 BASE_PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
-export PATH=$HOME/bin:$BASE_PATH
+export PATH=$HOME/.go/bin:$HOME/bin:$BASE_PATH
 
 export TEXPATH=~/.tex
 export TEXINPUTS=$TEXINPUTS:$TEXPATH
