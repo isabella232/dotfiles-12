@@ -3,7 +3,7 @@
 SCRIPT=$(readlink -f $0)
 CWD=$(dirname $SCRIPT)
 FILES=$CWD/files
-DEFAULT_RUBY=2.1.0
+DEFAULT_RUBY=2.2.0
 
 [ -z $RUBY ] && RUBY=$DEFAULT_RUBY
 
@@ -99,13 +99,11 @@ install_ruby() {
   rbenv rehash
   rbenv global $RUBY
 
-  gem install wirble bundler
+  gem install bundler
 
   for gemset in $(ls $CWD/gemsets); do
     rbenv gemset create $ruby $gemset
     echo $gemset > $HOME/.rbenv-gemsets
-    gem install bundler
-    rbenv rehash
     bundle install --gemfile $CWD/gemsets/$gemset
     rbenv rehash
   done

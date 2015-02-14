@@ -30,7 +30,6 @@ set history=10000
 set showmatch
 set showcmd
 set incsearch
-set ignorecase
 
 set tagstack
 set tags=tags
@@ -48,7 +47,7 @@ set wildmode=list:longest,full
 set list listchars=tab:»·,trail:·
 highlight SpecialKey ctermfg=red ctermbg=red
 
-autocmd FileType c,cpp,java,php,js,python,ruby,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 let mapleader = ","
 
