@@ -42,19 +42,8 @@ setup_files() {
 
 setup_vim() {
   echo "Setting up Vim"
-  PLUGINS=$CWD/vim_plugins
-  PLUGIN_DIR=$FILES/vim/bundle
-  mkdir -p $PLUGIN_DIR
-  for plugin in $PLUGINS/*; do
-    plugin_name=$(basename $plugin)
-    if [ ! -d $PLUGIN_DIR/$plugin_name ]; then
-      echo " * Installing $plugin_name"
-      cd $PLUGIN_DIR; git clone $(cat $plugin) $plugin_name 2> /dev/null; cd $OLDPWD
-    else
-      echo " * Updating $plugin_name"
-      cd $PLUGIN_DIR/$plugin_name; git pull > /dev/null; cd $OLDPWD
-    fi
-  done
+  mkdir -p $FILES/vim/bundle
+  git clone https://github.com/gmarik/vundle.git $FILES/vim/bundle/vundle
 }
 
 setup_rbenv() {

@@ -1,14 +1,21 @@
-call pathogen#infect()
-call pathogen#helptags()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-set t_Co=256
+Bundle 'gmarik/vundle'
+
+let mapleader = ","
+let localleader = ","
+
+set nocompatible
 
 syntax on
 filetype plugin indent on
+set encoding=utf-8
+set fileencoding=utf-8
+
+set t_Co=256
 set background=dark
 colorscheme desert256
-
-set nocompatible
 
 set autoindent
 set smartindent
@@ -29,13 +36,9 @@ set backspace=indent,eol,start
 set history=10000
 set showmatch
 set showcmd
+set showmode
 set incsearch
-
-set tagstack
-set tags=tags
-
-set encoding=utf-8
-set fileencoding=utf-8
+set cursorline
 
 "set foldmethod=indent
 "set foldnestmax=10
@@ -44,37 +47,45 @@ set fileencoding=utf-8
 set wildmenu
 set wildmode=list:longest,full
 
+set pastetoggle=<F2>
+nnoremap <F2> :set invpaste paste?<CR>
+
 set list listchars=tab:»·,trail:·
 highlight SpecialKey ctermfg=red ctermbg=red
 
 autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-
-let mapleader = ","
+autocmd BufNewFile,BufReadPost *.json setlocal filetype=javascript.json
 
 " Ctrl-C > copy to clip
 vmap <C-c> y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 
-function! StripWhitespace ()
-  exec ':%s/ \+$//gc'
-endfunction
-map ,s :call StripWhitespace ()<CR>
-
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
 nnoremap Y y$
+nnoremap <leader>d ddO
+nnoremap - ddkP
+nnoremap _ ddp
 
-" Plugin shortcuts
-nnoremap <silent> <F6> :NERDTreeToggle<CR>
-nnoremap <silent> <F7> :TagbarToggle<CR>
-nnoremap <silent> <F8> :CtrlP<CR>
+" Plugin settings
 
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
+Bundle 'Raimondi/delimitMate'
+Bundle 'bling/vim-airline'
+Bundle 'tpope/vim-endwise'
 
-let g:tagbar_foldlevel = 1
-let g:tagbar_width = 30
+Bundle 'kien/ctrlp.vim'
+nnoremap <leader>h :CtrlP<CR>
 let g:ctrlp_working_path_mode = 'rc'
-let g:netrw_liststyle=3
+
+Bundle 'scrooloose/nerdtree'
+Bundle 'Xuyuanp/nerdtree-git-plugin'
+nnoremap <leader>n :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore = ['tmp', 'pkg']
+autocmd VimEnter * if argc() == 0 | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+Bundle 'krisajenkins/vim-pipe'
+let g:vimpipe_invoke_map = '<leader>r'
+let g:vimpipe_close_map = '<leader>p'
