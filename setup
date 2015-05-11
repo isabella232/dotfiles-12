@@ -1,8 +1,7 @@
 #!/bin/sh
 
 SCRIPT=$(readlink -f $0)
-CWD=$(dirname $SCRIPT)
-FILES=$CWD/files
+FILES=$PWD/files
 DEFAULT_RUBY=2.2.0
 
 [ -z $RUBY ] && RUBY=$DEFAULT_RUBY
@@ -25,8 +24,8 @@ replace_file() {
 
 setup_files() {
   echo "Setting up .dotfiles"
-  for file in $(ls $FILES); do
-    orifile=$FILES/$file
+  for file in $FILES/*; do
+    orifile=$file
     dotfile=$HOME/.$file
     if [ -L $dotfile ]; then
       absfile=$(readlink -f $dotfile)
@@ -49,7 +48,7 @@ setup_vim() {
 setup_rbenv() {
   echo "Setting up rbenv"
   RBENV=$HOME/.rbenv
-  PLUGINS=$CWD/rbenv_plugins
+  PLUGINS=$PWD/rbenv_plugins
   PLUGIN_DIR=$RBENV/plugins
 
   if [ ! -d $RBENV ]; then
@@ -89,13 +88,17 @@ install_ruby() {
   rbenv global $RUBY
 
   gem install bundler
+  bundle install --gemfile $PWD/gemsets/base
 
-  for gemset in $(ls $CWD/gemsets); do
-    rbenv gemset create $ruby $gemset
-    echo $gemset > $HOME/.rbenv-gemsets
-    bundle install --gemfile $CWD/gemsets/$gemset
-    rbenv rehash
+  for gemset in $PWD/gemsets/*.gems; do
+    if [ "$gemset" != "base" ]; then
+      rbenv gemset create $ruby $gemset
+      echo $gemset > $HOME/.rbenv-gemsets
+      bundle install --gemfile $PWD/gemsets/$gemset
+    fi
   done
+
+  rbenv rehash
 }
 
 setup_files

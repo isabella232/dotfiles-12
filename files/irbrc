@@ -1,3 +1,5 @@
+require 'irb/completion'
+require 'wirb'
 IRB.conf[:SAVE_HISTORY] = 10000
 IRB.conf[:HISTORY_FILE] = "#{ENV["HOME"]}/.irb_history"
 
@@ -12,3 +14,5 @@ class Hash
     Hash[Array.toy(n){|c| (96+(c+1)).chr}.zip(Array.toy(n))]
   end
 end
+
+Wirb.start
