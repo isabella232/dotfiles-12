@@ -1,6 +1,5 @@
 #!/bin/sh
 
-SCRIPT=$(readlink -f $0)
 FILES=$PWD/files
 DEFAULT_RUBY=2.2.0
 
@@ -26,9 +25,9 @@ setup_files() {
   echo "Setting up .dotfiles"
   for file in $FILES/*; do
     orifile=$file
-    dotfile=$HOME/.$file
+    dotfile=$HOME/.$(basename $file)
     if [ -L $dotfile ]; then
-      absfile=$(readlink -f $dotfile)
+      absfile=$(readlink $dotfile)
       if [ $absfile != $orifile ]; then
         echo $dotfile links to $absfile
         replace_file $file
@@ -42,7 +41,9 @@ setup_files() {
 setup_vim() {
   echo "Setting up Vim"
   mkdir -p $FILES/vim/bundle
-  git clone https://github.com/gmarik/vundle.git $FILES/vim/bundle/vundle
+  if [ ! -d $FILES/vim/bundle/vundle ]; then
+    git clone https://github.com/gmarik/vundle.git $FILES/vim/bundle/vundle
+  fi
 }
 
 setup_rbenv() {
