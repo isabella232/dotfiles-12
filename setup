@@ -86,18 +86,7 @@ install_ruby() {
   rbenv install $RUBY
   rbenv rehash
   rbenv global $RUBY
-
   gem install bundler
-  bundle install --gemfile $PWD/gemsets/base
-
-  for gemset in $PWD/gemsets/*.gems; do
-    if [ "$gemset" != "base" ]; then
-      rbenv gemset create $ruby $gemset
-      echo $gemset > $HOME/.rbenv-gemsets
-      bundle install --gemfile $PWD/gemsets/$gemset
-    fi
-  done
-
   rbenv rehash
 }
 
