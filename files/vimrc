@@ -73,6 +73,7 @@ nnoremap _ ddp
 Bundle 'Raimondi/delimitMate'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-endwise'
+Bundle 'elzr/vim-json'
 
 Bundle 'kien/ctrlp.vim'
 nnoremap <leader>h :CtrlP<CR>
@@ -89,3 +90,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 Bundle 'krisajenkins/vim-pipe'
 let g:vimpipe_invoke_map = '<leader>r'
 let g:vimpipe_close_map = '<leader>p'
+
+Bundle 'kien/rainbow_parentheses.vim'
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
