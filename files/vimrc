@@ -73,7 +73,11 @@ nnoremap _ ddp
 Bundle 'Raimondi/delimitMate'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-abolish'
 Bundle 'elzr/vim-json'
+Bundle 'tmux-plugins/vim-tmux-focus-events'
+Bundle 'hashivim/vim-terraform'
+Bundle 'airblade/vim-gitgutter'
 
 Bundle 'kien/ctrlp.vim'
 nnoremap <leader>h :CtrlP<CR>

@@ -31,5 +31,5 @@ done
 
 source $ZSH/prompt
 
-setup_gpg_agent
+gpg-connect-agent /bye
 load_ssh_keys
