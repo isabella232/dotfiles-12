@@ -1,8 +1,19 @@
+function _route {
+  act=$1
+  if [ "$(uname)" = "Darwin" ]; then
+    if [ "$act" = "del" ]; then act="delete"; fi
+    sudo route -q "$act" -net "$2" -interface "$3"
+  else
+    sudo ip route "$act" "$2" dev "$3"
+  fi
+}
+
 function awsroutes {
   if [ $# -eq 3 ]; then
-    curl -s https://ip-ranges.amazonaws.com/ip-ranges.json | \
-    jq --arg region $2 -r '.prefixes[] | select(.region==$region) | select(.service=="EC2") | .ip_prefix' | \
-    xargs -Irange sudo ip route $1 range dev $3
+    for range in $(curl -s https://ip-ranges.amazonaws.com/ip-ranges.json | \
+      jq --arg region "$2" -r '.prefixes[] | select(.region==$region) | select(.service=="EC2") | .ip_prefix'); do
+      _route "$1" "$range" "$3"
+    done
   else
     echo "$0 <add|del> <region> <tun>"
   fi
